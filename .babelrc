@@ -3,8 +3,6 @@
 
   "plugins": [
     "transform-runtime",
-    "add-module-exports",
-    "transform-decorators-legacy",
     "transform-react-display-name"
   ],
 
