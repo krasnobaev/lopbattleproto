@@ -1,0 +1,20 @@
+@startuml
+
+title LoPBattleProto v1.*
+
+folder backend {
+  database MongoDB
+  node NodeJS
+
+  ' NodeJS -- MongoDB
+}
+
+folder frontend <<web browser>> {
+  frame "Редактирование\nпараметров" as editor <<Angular>>
+
+  frame "Поле боя" as battlefield <<React>>
+}
+
+backend -- frontend: HTTP
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+
+title Прототип Поля боя v0.*
+
+frame "Поле боя" as battlefield <<React>> {
+
+  artifact Интерфейс {
+    artifact Персонажи
+
+  }
+
+  artifact "Модель данных" {
+    artifact Battler {
+      artifact Персонаж
+      artifact Монстр
+    }
+    artifact Экипировка {
+      artifact Оружие
+      artifact Броня
+    }
+    artifact Инвентарь
+    artifact Формулы
+    artifact Правила
+    artifact Статы [
+      Статы
+
+      HP
+      MP
+      STR
+      AGI
+      DEX
+      VIT
+      LUK
+    ]
+  }
+
+  artifact Action {
+
+  }
+}
+
+@enduml

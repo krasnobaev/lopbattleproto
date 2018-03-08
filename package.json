@@ -1,0 +1,25 @@
+{
+  "name": "lopbattleproto",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel build src/index.html --public-url /parceltictactoe/",
+    "clean": "rm -rf ./dist ./.cache/",
+    "deploy": "",
+    "start": "parcel src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "parcel-bundler": "^1.6.2"
+  },
+  "dependencies": {
+    "autoprefixer": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
+    "node-sass": "^4.7.2",
+    "postcss-modules": "^1.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
