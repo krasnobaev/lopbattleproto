@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { chooseCell, chooseStep } from '../ducks/tictacboard';
-import Game from '../components/Game.js';
+import TicTacToeGame from '../components/TicTacToeGame.js';
 
 const mapStateToProps = (state, own) => {
   const {
@@ -38,9 +38,9 @@ const mapDispatchToProps = (dispatch, own) => {
   }
 }
 
-const VisibleGame = connect(
+const VisibleTicTacToeGame = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Game)
+)(TicTacToeGame)
 
-export default VisibleGame
+export default VisibleTicTacToeGame

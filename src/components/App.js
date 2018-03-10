@@ -1,14 +1,14 @@
 import React from 'react'
 import Header from './Header'
 import MainBlock from './MainBlock'
-import VisibleGame from '../containers/VisibleGame'
+import VisibleTicTacToeGame from '../containers/VisibleTicTacToeGame'
 import PanelBar from './PanelBar'
 
 const App = () => (
   <div>
     <Header />
     <MainBlock>
-      <VisibleGame />
+      <VisibleTicTacToeGame />
       <PanelBar />
     </MainBlock>
   </div>

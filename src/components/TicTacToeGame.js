@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Board from './Board';
-import './Game.sass';
+import './TicTacToeGame.sass';
 
-class Game extends React.Component {
+class TicTacToeGame extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.state.winner !== this.props.winner) {
@@ -44,7 +44,7 @@ class Game extends React.Component {
   }
 }
 
-Game.propTypes = {
+TicTacToeGame.propTypes = {
   dispatch: PropTypes.func.isRequired,
   onBoardClick: PropTypes.func.isRequired,
   onHistoryClick: PropTypes.func.isRequired,
@@ -61,4 +61,4 @@ Game.propTypes = {
   xIsNext: PropTypes.bool.isRequired
 }
 
-export default Game
+export default TicTacToeGame
