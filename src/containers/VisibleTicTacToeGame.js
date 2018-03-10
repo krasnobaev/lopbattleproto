@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { chooseCell, chooseStep } from '../ducks/tictacboard';
-import TicTacToeGame from '../components/TicTacToeGame.js';
+import TicTacToeGame from '../components/tictactoegame/TicTacToeGame.js';
 
 const mapStateToProps = (state, own) => {
   const {
