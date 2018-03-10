@@ -37,8 +37,12 @@
     "babel-polyfill": "^6.26.0",
     "node-sass": "^4.7.2",
     "postcss-modules": "^1.1.0",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.7"
+    "react-redux": "^5.0.7",
+    "redux-logger": "^3.0.6",
+    "redux-observable": "^0.18.0",
+    "rxjs": "^5.5.6"
   }
 }

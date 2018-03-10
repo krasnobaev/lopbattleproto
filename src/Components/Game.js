@@ -1,148 +1,64 @@
-import "babel-polyfill";
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import Board from './Board';
 import './Game.sass';
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
-
-function Square(props) {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
-
-class Board extends React.Component {
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
-
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      history: [
-        {
-          squares: Array(9).fill(null)
-        }
-      ],
-      stepNumber: 0,
-      xIsNext: true
-    };
-  }
 
-  handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.state.winner !== this.props.winner) {
+      this.setState({ winner: nextProps.state.winner });
     }
-    squares[i] = this.state.xIsNext ? "X" : "O";
-    this.setState({
-      history: history.concat([
-        {
-          squares: squares
-        }
-      ]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
-    });
-  }
-
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0
-    });
   }
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
-
-    const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
+    const moves = this.props.state.history.map((step, move) => {
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={this.props.onHistoryClick.bind(this, move)}>
+            {move ? `Go to move #${move}` : 'Go to game start'}
+          </button>
         </li>
       );
     });
-
-    let status;
-    if (winner) {
-      status = "Winner: " + winner;
-    } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
-    }
 
     return (
       <div className="game">
         <div className="game-board">
           <Board
-            squares={current.squares}
-            onClick={i => this.handleClick(i)}
+            boardPositions={this.props.state.history[this.props.state.stepNumber].boardPositions}
+            onClick={this.props.onBoardClick}
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div>{(this.props.state.winner) ?
+            `Winner: ${this.props.state.winner}` :
+            `Next player: ${this.props.state.xIsNext ? 'X' : 'O'}`
+          }</div>
           <ol>{moves}</ol>
         </div>
       </div>
     );
   }
+}
+
+Game.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  onBoardClick: PropTypes.func.isRequired,
+  onHistoryClick: PropTypes.func.isRequired,
+
+  history: PropTypes.arrayOf(
+    PropTypes.shape({
+      boardPositions: PropTypes.arrayOf(
+        PropTypes.string.isRequired
+      ).isRequired,
+    }).isRequired
+  ).isRequired,
+  stepNumber: PropTypes.number.isRequired,
+  winner: PropTypes.string.isRequired,
+  xIsNext: PropTypes.bool.isRequired
 }
 
 export default Game
