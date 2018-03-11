@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build src/index.html --public-url /parceltictactoe/",
+    "build": "parcel build src/index.html",
     "clean": "rm -rf ./dist ./.cache/",
-    "deploy": "",
+    "deploy": "shipit staging deploy && shipit staging post-deploy",
     "start": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
@@ -30,7 +30,8 @@
     "react-transform-catch-errors": "^1.0.2",
     "redbox-react": "^1.5.0",
     "redux": "^3.7.2",
-    "redux-devtools": "^3.4.1"
+    "redux-devtools": "^3.4.1",
+    "shipit-cli": "^3.0.0"
   },
   "dependencies": {
     "autoprefixer": "^8.1.0",
@@ -43,6 +44,7 @@
     "react-redux": "^5.0.7",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.18.0",
-    "rxjs": "^5.5.6"
+    "rxjs": "^5.5.6",
+    "shipit-deploy": "^2.5.1"
   }
 }
