@@ -5,6 +5,7 @@ module.exports = function (shipit) {
     default: {
       workspace: './.shipitworkspace',
       // dirToCopy: './dist',
+      branch: 'develop',
       deployTo: '/home/lopbattleproto/www/',
       repositoryUrl: 'git@bitbucket.org:sypwex/lopbattleproto.git',
       ignores: ['.git', 'node_modules'],

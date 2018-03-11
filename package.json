@@ -1,15 +1,16 @@
 {
   "name": "lopbattleproto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build src/index.html",
     "clean": "rm -rf ./dist ./.cache/",
-    "deploy": "shipit staging deploy && shipit staging post-deploy",
-    "start": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "build": "parcel build src/index.html",
+    "start": "parcel src/index.html",
+    "deploy": "shipit staging deploy && shipit staging post-deploy",
+    "start-current-version-on-remote-server": "shipit staging start-remote-server"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",

@@ -1,0 +1,23 @@
+.panelbar
+  margin: 1rem
+  border: 1px solid
+  height: 10rem
+  display: flex
+  button
+    margin-left: 0.3rem
+  .panelbar-pane
+    margin-left: 1rem
+  .panelbar-pane.history
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    .panelbar-moves
+      overflow: scroll
+      flex-grow: 1
+  .panelbar-pane.playeractions
+    flex-basis: 3rem
+    display: flex
+    flex-direction: column
+  .panelbar-pane.battlersinfo
+    align-items: flex-end
+    flex-basis: 10rem

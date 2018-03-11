@@ -12,7 +12,7 @@ import './main.sass';
 setTimeout(() => { // God told me TODO this
   ReactDOM.render(
     <Provider store={store}>
-      <App store={store}/>
+      <App />
     </Provider>,
     document.getElementById('root')
   );

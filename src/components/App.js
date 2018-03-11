@@ -1,17 +1,14 @@
 import React from 'react'
-import Header from './Header'
-import MainBlock from './MainBlock'
-import VisibleBattleField from '../containers/VisibleBattleField'
-import VisibleTicTacToeGame from '../containers/VisibleTicTacToeGame'
-import PanelBar from './PanelBar'
+import MainBlock from './interface/MainBlock'
+import { VisibleHeader, VisiblePanelBar } from '../containers/ControlsContainer'
+import { VisibleBattleField } from '../containers/BattleContainer'
 
 const App = () => (
   <div>
-    <Header />
+    <VisibleHeader />
     <MainBlock>
       <VisibleBattleField />
-      {/* <VisibleTicTacToeGame /> */}
-      <PanelBar />
+      <VisiblePanelBar />
     </MainBlock>
   </div>
 )
