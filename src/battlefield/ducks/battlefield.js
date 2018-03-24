@@ -67,11 +67,13 @@ const battleFieldState = (state = {
     case INITIALIZE_BATTLEFIELD:
       return oInitialState;
     case MAKE_THE_ATTACK:
-      battlers.find(el=>el.ID == iBattler).HP -= attacker.ATK;
+      let attacked = battlers.find(el=>el.ID == iBattler);
 
-      let attackerName = battlers.find(battler => battler.ID == attacker.ID).name;
-      let attackedName = battlers.find(battler => battler.ID == iBattler).name;
-      whatHappens = `MAKE_THE_ATTACK (${attackerName} => ${attackedName}) -${attacker.ATK}`;
+      // formulae
+      const hpdelta = Math.abs(attacker.ATK - attacked.DEF);
+      attacked.HP -= hpdelta;
+
+      whatHappens = `MAKE_THE_ATTACK (${attacker.name} => ${attacked.name}) -${hpdelta}HP = ${attacked.DEF}DEF - ${attacker.ATK}ATK`;
 
       return Object.assign({}, state, {
         battlers,

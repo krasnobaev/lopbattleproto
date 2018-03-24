@@ -1,0 +1,51 @@
+@startuml
+
+title Схема CI v.1.*
+
+frame "Staging server" as staging {
+  node Jenkins as Jenkins <<8080>>
+  node battlefield as bf_stg <<React>> {
+    rectangle "battlefield latest version" as bfrect1
+    cloud "$?" as bfrect2 <<1234>>
+    cloud "$shipit staging start-latest-bfield" as bfrect3 <<8080+>>
+  }
+  node workbench as wbench_stg <<express>> {
+    rectangle "history versions list" as wbrect1
+    cloud "$shipit staging start-latest-workbench" as wbrect2 <<3000>>
+  }
+  node database as database <<?>> {
+    rectangle "battle system info" as dbrect <<MongoDB>>
+  }
+  node middleware as middleware <<?>> {
+    rectangle "battle system info" as mwrect <<GraphQL>>
+  }
+
+  ' workbench .. middleware
+  ' middleware .. database
+  ' BitBucket ..> Jenkins : WebHook
+}
+
+frame localhost {
+  node battlefield as bf_l <<React>> {
+    rectangle "battlefield latest version" as bfrect4
+    cloud "$npm start" as bfrect5 <<1234>>
+    cloud "$http-server" as bfrect6 <<8080+>>
+  }
+  node workbench as wbench_l <<express>> {
+    rectangle "history versions proto" as wbrect3
+    cloud "$npm run start-workbench" as wbrect4 <<3000>>
+  }
+}
+
+cloud {
+  node BitBucket as BitBucket
+}
+
+frame client {
+  node browser as z <<Chrome,…>>
+}
+
+client .. localhost : HTTP
+client .. staging : HTTP
+
+@enduml

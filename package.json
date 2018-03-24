@@ -1,16 +1,21 @@
 {
   "name": "lopbattleproto",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./dist ./.cache/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "parcel build src/index.html",
-    "start": "parcel src/index.html",
-    "deploy": "shipit staging deploy && shipit staging post-deploy",
-    "start-current-version-on-remote-server": "shipit staging start-remote-server"
+    "build-bfield": "parcel build src/battlefield/index.html",
+    "start-bfield": "parcel src/battlefield/index.html",
+    "start-wbench": "cd src/services && npm start",
+    "start-wbench-dbg": "cd src/services && npm run debug",
+    "deploy": "shipit staging deploy && shipit staging inject-env",
+    "deploy-bfield": "shipit staging deploy-bfield && shipit staging start-bfield&",
+    "deploy-wbench": "shipit staging deploy-wbench && shipit staging start-wbench&",
+    "deploy-wbench-dbg": "shipit staging deploy-wbench && shipit staging start-wbench-dbg&",
+    "deploy-clean": "git push && npm run deploy && npm run deploy-bfield && npm run deploy-wbench"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
@@ -32,11 +37,14 @@
     "redbox-react": "^1.5.0",
     "redux": "^3.7.2",
     "redux-devtools": "^3.4.1",
-    "shipit-cli": "^3.0.0"
+    "shipit-cli": "^3.0.0",
+    "shipit-deploy": "^2.5.1",
+    "ssh-pool": "^4.0.0"
   },
   "dependencies": {
     "autoprefixer": "^8.1.0",
     "babel-polyfill": "^6.26.0",
+    "dotenv": "^5.0.1",
     "node-sass": "^4.7.2",
     "postcss-modules": "^1.1.0",
     "prop-types": "^15.6.1",
@@ -45,7 +53,6 @@
     "react-redux": "^5.0.7",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.18.0",
-    "rxjs": "^5.5.6",
-    "shipit-deploy": "^2.5.1"
+    "rxjs": "^5.5.6"
   }
 }

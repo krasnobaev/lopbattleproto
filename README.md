@@ -13,6 +13,10 @@ Use `npm run start` to start local wep app.
 
 ## To deploy on server
 
+Dependencies `http-server` should be installed globally.
+
+Unlock keychain to `lopbattleproto`.
+
 Use `npm run deploy` to deploy on remote server.
 
 Or `shipit staging start-remote-server` if service is stopped

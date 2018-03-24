@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= title
+  each version in versions
+    li
+      a(href=`battlefield/${version}`) #{version}
