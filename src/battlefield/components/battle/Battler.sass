@@ -1,10 +1,20 @@
+@keyframes hpdelta
+  from
+    top: 0rem
+  to
+    top: -3rem
+    opacity: 0
+    visibility: hidden
+
 .battler
+  position: relative
   width: inherit
   border: 5px solid
-  // width: 5rem
   // margin: 1rem
   padding: 0.5rem
   text-align: center
+  // for storybook
+  max-width: 8rem
   .indHP
     color: red
   .indMP
@@ -13,6 +23,21 @@
     color: green
   .indDEF
     color: brown
+  .battlerInfo
+    position: absolute
+.battler *
+  user-select: none
+
+// HP delta animation
+.battler:before
+  position: absolute
+  font-size: large
+  font-weight: bold
+  right: 2.5rem
+  top: -1rem
+  animation-name: hpdelta
+  animation-duration: 2s
+  animation-fill-mode: forwards
 
 .battler-currentmove
   border-color: red
@@ -23,10 +48,6 @@
   background-color: gray
   .name
     text-decoration: line-through
-
-.battler
-  .battlerInfo
-    position: absolute
 
 .battlerString
   .btn-action:not([disabled]):hover

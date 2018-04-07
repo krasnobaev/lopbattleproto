@@ -12,5 +12,18 @@
     width: 7rem
     height: 12rem
     display: flex
-  // .battlefield-slot:hover
-  //   border: 1px dotted
+
+.battlefield-grid.movementMode.movingparty-enemy
+  .battlefield-slot.enemycell:hover:not(.battlefield-slow-filled)
+    // border-width: 1px
+    border-style: dashed
+.battlefield-grid.movementMode.movingparty-player
+  .battlefield-slot.playercell:hover:not(.battlefield-slow-filled)
+    // border-width: 1px
+    border-style: dashed
+
+.battlefield-grid.attackMode
+  .battlefield-slot:hover
+    > .battler:not(.battler-currentmove):not(.battler-dead)
+      cursor: pointer
+      border-style: dashed

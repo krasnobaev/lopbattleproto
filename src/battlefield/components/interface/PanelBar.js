@@ -24,6 +24,7 @@ class PanelBar extends React.Component {
           ID={battler.ID}
           party={battler.party}
           HP={battler.HP}
+          showAttackButton={true}
         />
       );
     });
@@ -37,6 +38,7 @@ class PanelBar extends React.Component {
           ID={battler.ID}
           party={battler.party}
           HP={battler.HP}
+          showAttackButton={true}
         />
       );
     });
@@ -51,13 +53,33 @@ class PanelBar extends React.Component {
           <span>Enemy Battlers Info</span>
           <span className="panelbar-enemybattlers">{enemybattlers}</span>
         </div>
-        <div className="panelbar-pane playeractions">
+        <div className="panelbar-pane playerdecisions">
           <div>Actions</div>
-          <button>Attack</button>
-          <button disabled>Move</button>
-          <button disabled>Spell</button>
-          <button disabled>Item</button>
-          <button disabled>Flee</button>
+          <button
+            className={(this.props.isDecisionAttack)?'currentdecision':''}
+            onClick={this.props.onAttackModeBtnClick}
+            disabled={this.props.isAttackButtonDisabled}
+          >Attack</button>
+          <button
+            className={(this.props.isDecisionMovement)?'currentdecision':''}
+            onClick={this.props.onMoveModeBtnClick}
+            disabled={this.props.isMovementButtonDisabled}
+          >Move</button>
+          <button
+            className={(this.props.isDecisionSpell)?'currentdecision':''}
+            onClick={()=>{}}
+            disabled={true || this.props.isDecisionSpell}
+          >Spell</button>
+          <button
+            className={(this.props.isDecisionItem)?'currentdecision':''}
+            onClick={()=>{}}
+            disabled={true || this.props.isDecisionItem}
+          >Item</button>
+          <button
+            className={(this.props.isDecisionFlee)?'currentdecision':''}
+            onClick={()=>{}}
+            disabled={true || this.props.isDecisionFlee}
+          >Flee</button>
         </div>
         <div className="panelbar-pane battlersinfo">
           <span>Player Battlers Info</span>

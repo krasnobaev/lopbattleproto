@@ -3,19 +3,18 @@
 
   "plugins": [
     "transform-runtime",
-    "transform-react-display-name"
+    "transform-react-display-name",
+    "transform-class-properties"
   ],
 
   "env": {
     "development": {
       "plugins": [
-        "typecheck",
-        ["react-transform", {
-            "transforms": [{
-                "transform": "react-transform-catch-errors",
-                "imports": ["react", "redbox-react"]
-              }
-            ]
+        "typecheck", ["react-transform", {
+          "transforms": [{
+            "transform": "react-transform-catch-errors",
+            "imports": ["react", "redbox-react"]
+          }]
         }]
       ]
     }

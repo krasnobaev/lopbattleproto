@@ -1,23 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components'
 
 import './Battler.sass';
 
 class BattlerName extends React.Component {
   render() {
-    const oBattler = this.props.thisBattler;
+    const oBattler = this.props.thisBattler || {};
 
     const tooltip = `
-      name:${oBattler.name}
-      LVL:${oBattler.LVL}
-      pos:${oBattler.position}
+      ${oBattler.name} (LVL:${oBattler.LVL})
 
       HP:${oBattler.HP} \t/ MHP:${oBattler.MHP}
       MP:${oBattler.MP} \t/ MMP:${oBattler.MMP}
 
-      ATK:${oBattler.ATK}
-      DEF:${oBattler.DEF}
-    `;
+      ATK:${oBattler.ATK} \tDEF:${oBattler.DEF}
+
+      pos:${oBattler.position}
+    `.split('\n')
+    // .map((el,i)=>i>1?el.trim():`\t${el}`)
+    .map((el,i)=>el.trim())
+    .join('\n');
 
     return (
       ((this.props.short)) ? (
@@ -31,68 +34,73 @@ class BattlerName extends React.Component {
   }
 }
 
-class ActionButton extends React.Component {
-  render() {
-    return (
-      <button
-        className="btn-action"
-        onClick={this.props.onClick}
-        disabled={this.props.disabled}
-      >
-        {this.props.value}
-      </button>
-    );
-  }
-}
+const ActionButton = ({ onClick, disabled, value }) => (
+  <button
+    className="btn-action"
+    onClick={onClick}
+    disabled={disabled}
+  >
+    {value}
+  </button>
+);
 
-export class Battlerstring extends React.Component {
-  render() {
-    const oBattler = this.props.thisBattler;
+export const Battlerstring = ({ thisBattler, showAttackButton, onAttackClick, isAttackButtonDisabled }) => (
+  <div className="battlerString">
+    <BattlerName thisBattler={thisBattler} short={true} />
+    {(showAttackButton) ? (
+      <ActionButton
+        value="Attack"
+        onClick={onAttackClick}
+        disabled={isAttackButtonDisabled}
+        visible={false}
+      />
+    ) : ''}
+  </div>
+);
 
-    return (
-      <div classNAme="battlerString">
-        <BattlerName thisBattler={oBattler} short={true} />
-        <ActionButton
-          value="Attack"
-          onClick={this.props.onAttackClick}
-          disabled={!this.props.isAlive || this.props.isMoving || !this.props.isBattleActive}
-        />
-      </div>
-    );
+const BattlerTag = styled.div`
+  &.battler:before {
+    ${props => props.hpDelta && css`
+      content: "${props => props.hpDelta}";
+      color: crimson;
+    `}
   }
-}
+  &.battler-event:before {
+    ${props => props.event && css`
+      content: "${props => props.event}";
+      color: green;
+    `}
+  }
+`;
 
-export class Battler extends React.Component {
-  render() {
-    const oBattler = this.props.thisBattler;
-    return (
-      <div
-        className={`
-          battler battler-${
-            (this.props.isMoving ? 'currentmove' : 'currentwait')
-          }
-          ${(!this.props.isAlive ? 'battler-dead' : '')}
-        `}
-      >
-        <BattlerName thisBattler={oBattler} short={false} />
-        <ActionButton
-          value="Attack"
-          onClick={this.props.onAttackClick}
-          disabled={!this.props.isAlive || this.props.isMoving || !this.props.isBattleActive}
-        />
-        <div className="indHP">
-          HP: {oBattler.HP>0?oBattler.HP:0}/{oBattler.MHP}
-        </div>
-        <div className="indMP">
-          MP: {oBattler.MP}/{oBattler.MMP}
-        </div>
-        <div className="indATK">
-          ATK: {oBattler.ATK}
-        </div>
-        <div className="indDEF">
-          DEF: {oBattler.DEF}
-        </div>
-      </div>
-    );
-  }
-}
+export const Battler = ({
+  thisBattler, onAttackClick,
+  isAttackButtonDisabled, isMoving, isAlive
+}) => (<BattlerTag
+    id={`battler${thisBattler.ID}`}
+    battlerid={thisBattler.hpDelta}
+    hpDelta={thisBattler.hpDelta}
+    event={thisBattler.event}
+    className={`
+      battler battler-event battler-${
+        (isMoving ? 'currentmove' : 'currentwait')
+      }
+      ${(!isAlive ? 'battler-dead' : '')}
+    `}
+    onClick={onAttackClick}
+  >
+    <BattlerName thisBattler={thisBattler} short={false} />
+    <div className="indHP">
+      HP: {thisBattler.HP>0?thisBattler.HP:0}/{thisBattler.MHP}
+    </div>
+    <div className="indMP">
+      MP: {thisBattler.MP}/{thisBattler.MMP}
+    </div>
+    <div className="indATK">
+      ATK: {thisBattler.ATK}
+    </div>
+    <div className="indDEF">
+      DEF: {thisBattler.DEF}
+    </div>
+  </BattlerTag>
+);

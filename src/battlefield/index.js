@@ -5,13 +5,13 @@ import ReactDOM from 'react-dom';
 import 'rxjs';
 
 import App from './components/App'
-import { store } from './ducks/store.js'
+import { configureStore } from './ducks/store.js'
 import './main.sass';
 
 // ========================================
 setTimeout(() => { // God told me TODO this
   ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={configureStore()}>
       <App />
     </Provider>,
     document.getElementById('root')

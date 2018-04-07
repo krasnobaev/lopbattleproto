@@ -1,15 +1,18 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify';
+
 import MainBlock from './interface/MainBlock'
-import { VisibleHeader, VisiblePanelBar } from '../containers/ControlsContainer'
+import { VisibleMainBlock, VisibleHeader, VisiblePanelBar } from '../containers/ControlsContainer'
 import { VisibleBattleField } from '../containers/BattleContainer'
 
 const App = () => (
   <div>
     <VisibleHeader />
-    <MainBlock>
+    <VisibleMainBlock>
       <VisibleBattleField />
       <VisiblePanelBar />
-    </MainBlock>
+    </VisibleMainBlock>
+    <ToastContainer />
   </div>
 )
 
